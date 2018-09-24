@@ -1,0 +1,6 @@
+---
+- name: Instalación y configuración de MySQL
+  hosts: sql
+  remote_user: root
+  roles:
+   - sqlserver

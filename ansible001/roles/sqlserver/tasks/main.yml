@@ -1,2 +1,16 @@
 ---
-# tasks file for sqlserver
+- name: Install MySQL packages
+  apt: pkg= {{ item }} state=installed 
+  with_items:
+    - mysql-server
+    - mysql-client
+    - python-mysqldb
+    - libmysqlclient-dev
+
+- name: Set up MySQL password
+  mysql_user: name=root host={{ item }} password=pass state=present
+  with_items:
+    - "{{ ansible_hostname }}"
+    - 127.0.0.1
+    - ::1
+    - localhost
